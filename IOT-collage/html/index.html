@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <title>JavaScript</title>
+    <style>
+        #mybtn {
+            width: 100px;
+            height: 80px;
+            color:white;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <button id="mybtn">Click!</button>
+        0<input id = "myrange" type="range" min="0" max="255" step="10">255
+    </div>
+
+    <script>
+        //var HOST = "ws://localhost:3000";
+        var HOST = location.origin.replace(/^http/, 'ws');
+		var ws = new WebSocket(HOST); //#A
+		
+		var button = document.getElementById("mybtn");
+        var range = document.getElementById("myrange");
+        //button.style.backgroundColor="red";
+        button.onclick =  function () {
+			if (this.style.backgroundColor == "red"){
+				ws.send("on");
+			}else{
+				ws.send("off");
+			}
+			 
+        }
+        range.oninput = function(){
+            ws.send(this.value);
+        }
+        
+		ws.onmessage = function(event){
+            //console.log(event.data);
+            var msg = event.data;
+            if (msg == "on"){
+                button.style.backgroundColor = "green";
+            }else if(msg == "off") {
+                button.style.backgroundColor = "red";
+            }else{
+                range.value = msg
+            }
+		}
+
+		ws.onopen = function(){
+			console.log("Connected to server");
+        }
+        ws.onclose = function(){
+			console.log("Disconnected from server!");
+		}
+		/*if (ws && ws.readyState === 1) {
+			ws.send("red");
+		} else {
+			console.log("server is down");
+		}*/
+    </script>
+</body>
+
+</html>

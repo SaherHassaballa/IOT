@@ -66,9 +66,9 @@ void webSocketEvent(WStype_t type, uint8_t *payload, size_t length)
 		}
 		else
 		{
-
-			if (value < 0)
-				value = 0;
+			int value = atoi((char *)payload);
+#// data in payload return as array of 8 bit of bytes so we convert all to string then convert to integer use atoi(Assci to int)
+				if (value<0) value = 0;
 			if (value > 255)
 				value = 255;
 			analogWrite(LED_BUILTIN, value);

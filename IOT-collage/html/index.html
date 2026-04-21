@@ -55,6 +55,7 @@
 
 		ws.onopen = function(){
 			console.log("Connected to server");
+            //ws.send("Hello server") // send msg to server (in his terminal where server active) after onopen occour 
         }
         ws.onclose = function(){
 			console.log("Disconnected from server!");

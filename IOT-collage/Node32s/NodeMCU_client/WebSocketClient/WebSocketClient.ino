@@ -124,7 +124,7 @@ void setup()
 	}
 
 	// server address, port and URL
-	webSocket.begin("192.168.1.37", 3000, "/");
+	webSocket.begin("192.168.1.36", 3000, "/");
 
 	// event handler
 	webSocket.onEvent(webSocketEvent);

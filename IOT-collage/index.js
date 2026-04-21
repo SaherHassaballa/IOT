@@ -3,6 +3,10 @@ const app = express()
 
 const PORT = 3000
 
+
+//app.listen(PORT ,function(req,res){
+//    console.log("server is runing at port "+PORT);
+//});
 app.get('/',function(req,res){
     res.sendFile(__dirname+"/html/index.html");
 });
